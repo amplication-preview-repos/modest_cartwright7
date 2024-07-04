@@ -1,0 +1,20 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model EventLog {
+  createdAt DateTime  @default(now())
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  key       String?
+  offset    Int?
+  partition Int?
+  timestamp DateTime?
+  topic     String?
+  updatedAt DateTime  @updatedAt
+  value     Json?
+}
